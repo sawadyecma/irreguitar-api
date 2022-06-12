@@ -1,0 +1,24 @@
+@basepath = http://localhost:11741/turnings
+
+
+GET {{basepath}}
+
+
+###
+POST {{basepath}}
+Content-Type: application/json
+
+{
+    "name": "DropD"
+}
+
+###
+PUT {{basepath}}/adb5ba24-1bcb-45d3-a11f-c658c7b97835
+Content-Type: application/json
+
+{
+    "name": "DropC"
+}
+
+###
+DELETE {{basepath}}/4
