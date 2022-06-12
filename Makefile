@@ -1,2 +1,5 @@
-server:
-	deno run --allow-net --watch=./ ./server/src/server.ts
+server/run:
+	deno run --allow-net --allow-read --allow-write --watch=./ ./server/src/server.ts
+
+db:
+	deno run --allow-read --allow-write ./db/db.ts

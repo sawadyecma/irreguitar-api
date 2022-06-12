@@ -1,15 +1,21 @@
-import { oak, v4 } from "./deps.ts";
+import { oak, sqlite } from "./deps.ts";
+import { TurningDataSource } from "./infra/datasource/turning.ts";
 import { turnings } from "./persisted.ts";
+import { ListTurningUsecase } from "./usecase/turning/list-turning.ts";
 
 export const router = new oak.Router();
+
+const db = new sqlite.DB("./irreguitar.sqlite");
 
 router
   .get("/", (context) => {
     context.response.body = "irreguitar-api";
   })
   .get("/turnings", (context) => {
+    const u = new ListTurningUsecase(new TurningDataSource(db));
+
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { turnings: Array.from(turnings.values()) };
+    context.response.body = { turnings: u.listTurning() };
   })
   .post("/turnings", async (context) => {
     const body = context.request.body({ type: "json" });
