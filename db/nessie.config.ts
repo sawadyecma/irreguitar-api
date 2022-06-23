@@ -7,6 +7,8 @@ const config: nessie.NessieConfig = {
   client,
   migrationFolders: ["./db/migrations"],
   seedFolders: ["./db/seeds"],
+  migrationTemplate: "./db/template/migration.ts",
+  seedTemplate: "./db/template/seed.ts",
 };
 
 export default config;
