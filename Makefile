@@ -3,3 +3,19 @@ server/run:
 
 db:
 	deno run --allow-read --allow-write ./db/db.ts
+
+# create migration file
+migration/create:
+	cd ./db && deno run -A --unstable https://deno.land/x/nessie@2.0.5/cli.ts make --migrationTemplate ./db/template/migration.ts ${name}
+
+migration/run:
+	cd ./db && deno run -A --unstable https://deno.land/x/nessie@2.0.5/cli.ts migrate
+
+migration/rollback:
+	cd ./db && deno run -A --unstable https://deno.land/x/nessie@2.0.5/cli.ts rollback
+
+seed/create:
+	cd ./db && deno run -A --unstable https://deno.land/x/nessie@2.0.5/cli.ts make:seed --seedTemplate ./db/template/seed.ts ${name}
+
+seed/run:
+	cd ./db && deno run -A --unstable https://deno.land/x/nessie@2.0.5/cli.ts seed 
